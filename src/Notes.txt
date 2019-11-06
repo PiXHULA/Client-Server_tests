@@ -1,0 +1,46 @@
+Uppdelat i två applikationer
+Server app - lev. data och kan serva många clienter
+"Backend"
+
+Klient app
+Kopplar upp sig mot servern
+Konsumerar och visar upp data
+"Frontend"
+
+TCP
+Initial uppkoppling. tänk telefonsamtal
+Infon flödar kontinuerligt, kontroll sker om lev kommer fram
+Mer tidskrävande då det finns kontroller
+3-way handshake för att initiera nätverkskontakten
+
+HUR SKA VI TÄNKA?
+Behöver initiera socketar på bägge sidor
+varje socket har en inström och utström - finns 4 > 2 på client > 2 på server
+3WHSHAKE - vi kommer aldrig att se det, Java tar hand om det. Vi ser ifall det blir problem
+
+HUR GÖR VI?
+Börja med serversidan. Servern ska vara igång. Servern måste ha en serversocket
+Lyssnar socket(Serversocket) - ServerSocket lyssnarSock = new ServerSocket(portnummer);
+OBS! LYSSNAR BARA!
+serverSocket.accept(); är igång och lyssnar - tråden stannar tills något är meottaget
+Skapa socket också!
+Klient-sidan
+Kopplar upp oss med hjälp av Socket > Socket socketToServer = new Socket(inetAddress,portnummer);
+
+jmf.request - clienten skickar request ,jmf.response - servern svarar
+POJO?
+GLÖM INTE ATT WRAPPA UTSTRÖMMEN FÖRE INSTRÖMMEN
+
+
+Måste veta vem som börjar utav snurrorna som finns i server/klienten
+
+Serialisering
+ObjectInputStream och ObjectOutputStream
+readObject() och writeObject()
+
+ALLA OBJEKT MÅSTE SERIALISERAS - implement Serializable - flesta av Javas klasser går att skicka
+Klasserna behöver finnas på både server och client
+Klassen behöver vara EXAKT likadan
+Klassen måste ligga i paket med samma namn
+Klassen behöver ”serialVersionUID” deklarerad enligt följande: static final long serialVersionUID = 42L;
+
